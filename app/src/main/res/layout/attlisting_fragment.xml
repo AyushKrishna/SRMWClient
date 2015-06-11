@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Check Friend's Attendance"/>
+    <EditText
+        android:id="@+id/edittext_frndrollno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Friend's Roll no"/>
+
+        <!--PROBLEM 1 :
+        The ExpandablelistView is getting overlapped by the FrameLayout View below it and is unable
+        to display the list completely -->
+        <!-- POSSIBLE REASON:
+        wrap_content will not work for ExpandableListView height because at the time of creation
+        the of ExpandableListView's parent container(i.e. LinearLayout container in this case),it will only
+        consider space for only 1 Textview (i.e. for 1st parent group) as during time of creation
+        the container layout has no information about how many parent and child views ExpListView
+        will have.That is determined later on by Adapter.So after the the usr clicks on UI parent
+        group the list expands behind the underlying view ,ie, the view below the ExpListView
+        overlaps the expanded list view texts -->
+        <!-- PROBABLE SOLUTION :
+        we need to manually calculate the height of the complete ExpListView according to the no.of
+        entries we have in the list and set it programitically during layout creation so that we
+        will have enough space on screen to see the whole list in expanded mode -->
+
+        <!--PROBLEM 2 :
+        Suppose we are able to get a fixed space to display all the options in the list, yet
+        if the user collapses all the parent groups of list then there will be empty space left between
+        the ExpListView and view below it.How to remove that space???? -->
+        <!--PROBABLE SOLUTION 1:
+         Shift all the views of the container using setX(),set Y() on every expand/collapse of
+         the ExpListView
+            PROBABLE SOLUTION 2:
+         USE HeterogeneousExpandableList .Since we know that the ExpListView manages the expand/collapse for all its view.Why
+         not to set the view below it as the part of ExpListView also so that the ExpListView will
+         now be responsible for handling coordinates of that view also-->
+
+    <ExpandableListView android:id="@+id/list"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="1"/>
+<Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Button_AttGo"
+    android:text="Go"/>
+    </LinearLayout>
+
+

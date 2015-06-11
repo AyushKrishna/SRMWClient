@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <!-- PROBLEM :
+        Is mein problem ye aa rahi thi ki agar textview me text bahut jyada tha toh wo poori
+        screen space le raha tha jiski wajah se checkbox out of screen ho ja raha tha
+        SOLUTION :
+        Added these 3 lines in text view
+        android:layout_width="0dip"
+        android:layout_weight="1.0"
+        android:maxLines="1"
+     -->
+
+    <TextView
+        android:id="@+id/child_text"
+        android:layout_width="0dip"
+        android:layout_weight="1.0"
+        android:maxLines="1"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/child_checkbox"
+        />
+</LinearLayout>
